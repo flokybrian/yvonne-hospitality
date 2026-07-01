@@ -1,0 +1,74 @@
+/* ===========================
+   CARD COMPONENT
+=========================== */
+
+.card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Image wrapper */
+.imageWrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.imageWrapper img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    display: block;
+}
+
+.card:hover img {
+    transform: scale(1.06);
+}
+
+/* Badge overlay */
+.imageWrapper span {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: var(--primary);
+    color: white;
+    padding: 6px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+}
+
+/* Card body */
+.body {
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    flex: 1;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 480px) {
+    .imageWrapper img {
+        height: 200px;
+    }
+
+    .body {
+        padding: 18px 20px;
+    }
+}

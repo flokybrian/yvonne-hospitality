@@ -1,0 +1,39 @@
+/* ===========================
+   SERVICES GRID
+=========================== */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 56px;
+}
+
+.cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 900px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 580px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .cta {
+        margin-top: 40px;
+    }
+}

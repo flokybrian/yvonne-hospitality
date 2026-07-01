@@ -1,0 +1,292 @@
+/* ===========================
+   NAVBAR
+=========================== */
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+    transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+    padding: 18px 0;
+}
+
+.scrolled {
+    background: white;
+    box-shadow: var(--shadow-md);
+    padding: 12px 0;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ===========================
+   DESKTOP NAV
+=========================== */
+
+.desktop {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+}
+
+.links {
+    display: flex;
+    gap: 26px;
+    align-items: center;
+}
+
+.links a {
+    position: relative;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text);
+    transition: color 0.3s;
+    white-space: nowrap;
+}
+
+.links a::after {
+    content: "";
+    position: absolute;
+    bottom: -6px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--primary);
+    transition: width 0.3s;
+}
+
+.links a:hover { color: var(--primary); }
+
+.links a:hover::after,
+.active::after {
+    width: 100%;
+}
+
+/* ===========================
+   MOBILE TOGGLE
+=========================== */
+
+.mobile {
+    display: none;
+}
+
+.hamburger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--border);
+    background: white;
+    color: var(--text);
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 1100;
+    position: relative;
+}
+
+.hamburger:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* ===========================
+   BACKDROP
+=========================== */
+
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1050;
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* ===========================
+   DRAWER
+=========================== */
+
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: min(320px, 88vw);
+    height: 100dvh;
+    background: white;
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--shadow-lg);
+}
+
+.drawerOpen {
+    transform: translateX(0);
+}
+
+/* Drawer header */
+.drawerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--border);
+}
+
+.drawerClose {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    background: none;
+    color: var(--text);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.drawerClose:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Drawer nav links */
+.drawerNav {
+    display: flex;
+    flex-direction: column;
+    padding: 24px 24px 16px;
+    gap: 4px;
+    flex: 1;
+}
+
+.drawerLink {
+    display: block;
+    padding: 13px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    transition: var(--transition);
+    border-left: 3px solid transparent;
+}
+
+.drawerLink:hover {
+    background: var(--secondary);
+    color: var(--primary);
+    border-left-color: var(--primary);
+}
+
+.drawerLinkActive {
+    background: var(--secondary);
+    color: var(--primary);
+    border-left-color: var(--primary);
+}
+
+/* CTA */
+.drawerCta {
+    padding: 0 24px 20px;
+}
+
+.drawerCtaBtn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: white;
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.drawerCtaBtn:hover {
+    background: var(--primary-dark);
+}
+
+/* Contact info */
+.drawerContact {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.drawerContactItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: var(--text-light);
+    transition: color 0.2s;
+    word-break: break-all;
+}
+
+.drawerContactItem:hover {
+    color: var(--primary);
+}
+
+/* Socials */
+.drawerSocials {
+    padding: 16px 24px 28px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.drawerSocialIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    color: var(--text);
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.drawerSocialIcon:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+/* ===========================
+   RESPONSIVE BREAKPOINTS
+=========================== */
+
+@media (max-width: 1024px) {
+    .desktop {
+        gap: 24px;
+    }
+    .links {
+        gap: 18px;
+    }
+}
+
+@media (max-width: 900px) {
+    .desktop {
+        display: none;
+    }
+    .mobile {
+        display: block;
+    }
+}

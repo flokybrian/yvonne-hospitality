@@ -1,0 +1,97 @@
+:root{
+
+/* ===========================
+   COLORS
+=========================== */
+
+--primary:#B68A52;
+--primary-dark:#8A6234;
+--secondary:#F7F2EC;
+--accent:#D7B98E;
+
+--white:#FFFFFF;
+--black:#111111;
+
+--text:#2D2D2D;
+--text-light:#666666;
+
+--border:#ECECEC;
+
+--success:#16A34A;
+--danger:#DC2626;
+--warning:#F59E0B;
+
+
+/* ===========================
+   TYPOGRAPHY
+=========================== */
+
+--font-heading:'Playfair Display',serif;
+
+--font-body:'Inter',sans-serif;
+
+
+/* ===========================
+   FONT SIZES
+=========================== */
+
+--fs-xs:.75rem;
+--fs-sm:.875rem;
+--fs-base:1rem;
+--fs-lg:1.125rem;
+--fs-xl:1.25rem;
+--fs-2xl:1.5rem;
+--fs-3xl:2rem;
+--fs-4xl:2.8rem;
+--fs-5xl:4rem;
+
+
+/* ===========================
+   SPACING
+=========================== */
+
+--space-1:4px;
+--space-2:8px;
+--space-3:12px;
+--space-4:16px;
+--space-5:24px;
+--space-6:32px;
+--space-7:48px;
+--space-8:64px;
+--space-9:96px;
+
+
+/* ===========================
+   BORDER RADIUS
+=========================== */
+
+--radius-sm:6px;
+--radius-md:12px;
+--radius-lg:18px;
+--radius-xl:24px;
+--radius-full:999px;
+
+
+/* ===========================
+   SHADOWS
+=========================== */
+
+--shadow-sm:0 2px 8px rgba(0,0,0,.05);
+--shadow-md:0 8px 24px rgba(0,0,0,.08);
+--shadow-lg:0 16px 40px rgba(0,0,0,.12);
+
+
+/* ===========================
+   TRANSITIONS
+=========================== */
+
+--transition:.35s ease;
+
+
+/* ===========================
+   MAX WIDTH
+=========================== */
+
+--container:1280px;
+
+}

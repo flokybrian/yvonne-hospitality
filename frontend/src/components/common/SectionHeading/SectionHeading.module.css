@@ -1,0 +1,52 @@
+/* ===========================
+   SECTION HEADING
+=========================== */
+
+.heading {
+    margin-bottom: 56px;
+    max-width: 680px;
+}
+
+.heading span {
+    display: inline-block;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.heading h2 {
+    font-size: clamp(1.7rem, 4vw, var(--fs-4xl));
+    line-height: 1.2;
+    margin: 0 0 14px;
+}
+
+.heading p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin: 0;
+}
+
+/* Centered variant */
+.center {
+    text-align: center;
+    margin-inline: auto;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 768px) {
+    .heading {
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .heading {
+        margin-bottom: 32px;
+    }
+}

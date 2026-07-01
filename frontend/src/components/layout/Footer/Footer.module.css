@@ -1,0 +1,285 @@
+/* ===========================
+   FOOTER
+=========================== */
+
+.footer {
+    background: #111111;
+    color: white;
+    padding: 80px 0 0;
+}
+
+/* Main grid */
+.grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr 1.4fr;
+    gap: 48px;
+    margin-bottom: 60px;
+}
+
+/* ===========================
+   BRAND COLUMN
+=========================== */
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.brandTagline {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0;
+}
+
+.brandDesc {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* ===========================
+   SECTION HEADINGS
+=========================== */
+
+.colTitle {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--primary);
+    margin: 0 0 18px;
+}
+
+/* ===========================
+   LINKS LIST
+=========================== */
+
+.links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.links a {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.65);
+    transition: color 0.25s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.links a:hover {
+    color: var(--primary);
+}
+
+/* ===========================
+   CONTACT COLUMN
+=========================== */
+
+.contactList {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.contactItem {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.65);
+    transition: color 0.25s;
+    word-break: break-all;
+}
+
+.contactItem:hover {
+    color: var(--primary);
+}
+
+.contactIcon {
+    color: var(--primary);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* ===========================
+   NEWSLETTER COLUMN
+=========================== */
+
+.newsletterDesc {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.55);
+    line-height: 1.7;
+    margin: 0 0 16px;
+}
+
+.newsletterForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.newsletterInput {
+    width: 100%;
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.07);
+    color: white;
+    font-size: 0.875rem;
+    font-family: var(--font-body);
+    outline: none;
+    transition: border-color 0.25s;
+}
+
+.newsletterInput::placeholder {
+    color: rgba(255, 255, 255, 0.35);
+}
+
+.newsletterInput:focus {
+    border-color: var(--primary);
+}
+
+.newsletterBtn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    font-size: 0.875rem;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: background 0.25s;
+}
+
+.newsletterBtn:hover {
+    background: var(--primary-dark);
+}
+
+/* ===========================
+   SOCIALS ROW
+=========================== */
+
+.socialsRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 28px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+}
+
+.socialsLabel {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.socials {
+    display: flex;
+    gap: 12px;
+}
+
+.socialIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.95rem;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.socialIcon:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ===========================
+   COPYRIGHT BAR
+=========================== */
+
+.copyright {
+    padding: 18px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.copyright p {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.35);
+    margin: 0;
+}
+
+.copyright a {
+    font-size: 0.8rem;
+    color: var(--primary);
+    transition: opacity 0.2s;
+}
+
+.copyright a:hover {
+    opacity: 0.75;
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media (max-width: 1100px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 40px;
+    }
+
+    /* Brand spans full width on tablet */
+    .brand {
+        grid-column: 1 / -1;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer {
+        padding: 60px 0 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .brand {
+        grid-column: auto;
+    }
+
+    .socialsRow {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+    }
+
+    .copyright {
+        flex-direction: column;
+        text-align: center;
+    }
+}
