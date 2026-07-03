@@ -5,6 +5,7 @@ import SetupRoute        from './components/SetupRoute'
 
 import Login             from './pages/Login'
 import SetupCredentials  from './pages/SetupCredentials'
+import Locked            from './pages/Locked'
 import Dashboard         from './pages/Dashboard'
 import GalleryManager    from './pages/GalleryManager'
 import VideosManager     from './pages/VideosManager'
@@ -16,7 +17,8 @@ export default function App() {
     <AuthProvider>
       <Routes>
         {/* Public */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/login"  element={<Login />} />
+        <Route path="/locked" element={<Locked />} />
 
         {/* First-time setup — only after default-cred login */}
         <Route
@@ -29,10 +31,10 @@ export default function App() {
         />
 
         {/* Protected admin pages */}
-        <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-        <Route path="/gallery"      element={<ProtectedRoute><GalleryManager /></ProtectedRoute>} />
-        <Route path="/videos"       element={<ProtectedRoute><VideosManager /></ProtectedRoute>} />
-        <Route path="/portfolio"    element={<ProtectedRoute><PortfolioManager /></ProtectedRoute>} />
+        <Route path="/"            element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/gallery"     element={<ProtectedRoute><GalleryManager /></ProtectedRoute>} />
+        <Route path="/videos"      element={<ProtectedRoute><VideosManager /></ProtectedRoute>} />
+        <Route path="/portfolio"   element={<ProtectedRoute><PortfolioManager /></ProtectedRoute>} />
         <Route path="/testimonials" element={<ProtectedRoute><TestimonialsManager /></ProtectedRoute>} />
 
         {/* Fallback */}

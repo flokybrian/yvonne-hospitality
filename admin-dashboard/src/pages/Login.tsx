@@ -1,7 +1,7 @@
-import { useState, FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useAuth } from '../context/AuthContext'
-import { LuEye, LuEyeOff } from 'react-icons/lu'
+import { useState, FormEvent, useEffect } from 'react'
+import { useNavigate }                    from 'react-router-dom'
+import { useAuth }                        from '../context/AuthContext'
+import { LuEye, LuEyeOff, LuTriangleAlert, LuShieldOff } from 'react-icons/lu'
 
 export default function Login() {
   const [username, setUsername] = useState('')
@@ -9,8 +9,16 @@ export default function Login() {
   const [showPass, setShowPass] = useState(false)
   const [error,    setError]    = useState('')
   const [loading,  setLoading]  = useState(false)
-  const { login }               = useAuth()
-  const navigate                = useNavigate()
+
+  const { login, isLocked, failedAttempts } = useAuth()
+  const navigate = useNavigate()
+
+  // Redirect to locked page if already locked on mount
+  useEffect(() => {
+    if (isLocked) navigate('/locked', { replace: true })
+  }, [isLocked, navigate])
+
+  const attemptsLeft = Math.max(0, 2 - failedAttempts)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -20,13 +28,27 @@ export default function Login() {
     try {
       const result = await login(username, password)
 
-      if (result === 'ok') {
-        navigate('/')
-      } else if (result === 'setup_required') {
-        // Default creds matched → force credential setup
-        navigate('/setup')
-      } else {
-        setError('Incorrect username or password.')
+      switch (result) {
+        case 'ok':
+          navigate('/')
+          break
+
+        case 'setup_required':
+          navigate('/setup')
+          break
+
+        case 'locked':
+          navigate('/locked', { replace: true })
+          break
+
+        case 'invalid':
+          setPassword('')        // clear password field on failure
+          if (2 - failedAttempts <= 0) {
+            navigate('/locked', { replace: true })
+          } else {
+            setError('Incorrect username or password.')
+          }
+          break
       }
     } catch {
       setError('Something went wrong. Please try again.')
@@ -38,6 +60,7 @@ export default function Login() {
   return (
     <div style={s.page}>
       <div style={s.card}>
+
         {/* Branding */}
         <div style={s.header}>
           <div style={s.logoWrap}>
@@ -47,8 +70,35 @@ export default function Login() {
           <p style={s.pageLabel}>Admin Dashboard</p>
         </div>
 
+        {/* ── Warning bar: shown after 1 failed attempt ── */}
+        {failedAttempts === 1 && (
+          <div style={s.warningBox}>
+            <LuTriangleAlert size={18} />
+            <div>
+              <strong>Warning — 1 attempt remaining!</strong>
+              <br />
+              <span style={{ fontSize: '13px' }}>
+                One more failure will lock this admin panel and
+                send an alert to the registered owner.
+              </span>
+            </div>
+          </div>
+        )}
+
         <form onSubmit={handleSubmit} style={s.form} noValidate>
-          {error && <div style={s.errorBox}>{error}</div>}
+
+          {/* Error message */}
+          {error && (
+            <div style={s.errorBox}>
+              <LuShieldOff size={16} />
+              {error}
+              {attemptsLeft > 0 && (
+                <span style={s.attemptsLeft}>
+                  &nbsp;({attemptsLeft} attempt{attemptsLeft !== 1 ? 's' : ''} left)
+                </span>
+              )}
+            </div>
+          )}
 
           {/* Username */}
           <div style={s.field}>
@@ -62,6 +112,7 @@ export default function Login() {
               autoComplete="username"
               required
               autoFocus
+              disabled={loading}
             />
           </div>
 
@@ -77,17 +128,36 @@ export default function Login() {
                 style={{ ...s.input, paddingRight: '48px' }}
                 autoComplete="current-password"
                 required
+                disabled={loading}
               />
               <button
                 type="button"
                 style={s.eyeBtn}
                 onClick={() => setShowPass(!showPass)}
                 tabIndex={-1}
-                aria-label={showPass ? 'Hide password' : 'Show password'}
+                aria-label={showPass ? 'Hide' : 'Show'}
               >
                 {showPass ? <LuEyeOff size={18} /> : <LuEye size={18} />}
               </button>
             </div>
+          </div>
+
+          {/* Attempt indicator dots */}
+          <div style={s.dotsRow}>
+            {[1, 2].map((i) => (
+              <div
+                key={i}
+                style={{
+                  ...s.dot,
+                  background: i <= failedAttempts ? '#DC2626' : '#D1D5DB',
+                }}
+              />
+            ))}
+            <span style={s.dotsLabel}>
+              {failedAttempts === 0
+                ? 'No failed attempts'
+                : `${failedAttempts} failed attempt${failedAttempts > 1 ? 's' : ''}`}
+            </span>
           </div>
 
           <button
@@ -95,7 +165,7 @@ export default function Login() {
             disabled={loading}
             style={{ ...s.btn, opacity: loading ? 0.7 : 1 }}
           >
-            {loading ? 'Logging in…' : 'Login'}
+            {loading ? 'Verifying…' : 'Login'}
           </button>
         </form>
       </div>
@@ -103,7 +173,7 @@ export default function Login() {
   )
 }
 
-// ─── Styles ────────────────────────────────────────────────────────────────
+// ─── Styles ──────────────────────────────────────────────────────────────────
 
 const s: Record<string, React.CSSProperties> = {
   page: {
@@ -123,12 +193,12 @@ const s: Record<string, React.CSSProperties> = {
     boxShadow: '0 20px 60px rgba(0,0,0,0.3)',
   },
   header: {
-    textAlign: 'center',
-    marginBottom: '36px',
+    textAlign: 'center' as const,
+    marginBottom: '28px',
   },
   logoWrap: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as const,
     alignItems: 'center',
     marginBottom: '10px',
   },
@@ -145,7 +215,7 @@ const s: Record<string, React.CSSProperties> = {
     fontWeight: '700',
     letterSpacing: '0.2em',
     color: '#888',
-    textTransform: 'uppercase',
+    textTransform: 'uppercase' as const,
     marginTop: '4px',
   },
   pageLabel: {
@@ -156,14 +226,27 @@ const s: Record<string, React.CSSProperties> = {
     paddingTop: '10px',
     marginTop: '10px',
   },
+  warningBox: {
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: '12px',
+    background: '#FFFBEB',
+    border: '1.5px solid #F59E0B',
+    borderRadius: '10px',
+    padding: '14px 16px',
+    marginBottom: '20px',
+    color: '#92400E',
+    fontSize: '14px',
+    lineHeight: '1.5',
+  },
   form: {
     display: 'flex',
-    flexDirection: 'column',
-    gap: '20px',
+    flexDirection: 'column' as const,
+    gap: '18px',
   },
   field: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'column' as const,
     gap: '8px',
   },
   label: {
@@ -172,7 +255,7 @@ const s: Record<string, React.CSSProperties> = {
     color: '#2D2D2D',
   },
   inputWrap: {
-    position: 'relative',
+    position: 'relative' as const,
   },
   input: {
     width: '100%',
@@ -182,10 +265,10 @@ const s: Record<string, React.CSSProperties> = {
     fontSize: '15px',
     outline: 'none',
     fontFamily: 'inherit',
-    boxSizing: 'border-box',
+    boxSizing: 'border-box' as const,
   },
   eyeBtn: {
-    position: 'absolute',
+    position: 'absolute' as const,
     right: '12px',
     top: '50%',
     transform: 'translateY(-50%)',
@@ -196,6 +279,23 @@ const s: Record<string, React.CSSProperties> = {
     display: 'flex',
     alignItems: 'center',
     padding: '4px',
+    minWidth: 0,
+    minHeight: 0,
+  },
+  dotsRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  dot: {
+    width: '12px',
+    height: '12px',
+    borderRadius: '50%',
+    transition: 'background 0.3s',
+  },
+  dotsLabel: {
+    fontSize: '12px',
+    color: '#888',
   },
   btn: {
     padding: '15px',
@@ -207,15 +307,20 @@ const s: Record<string, React.CSSProperties> = {
     fontWeight: '700',
     cursor: 'pointer',
     boxShadow: '0 4px 0 #8A6234',
-    marginTop: '8px',
-    transition: 'transform 0.15s, box-shadow 0.15s',
+    transition: 'all 0.15s',
   },
   errorBox: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
     background: '#FEE2E2',
     color: '#DC2626',
     padding: '12px 16px',
     borderRadius: '8px',
     fontSize: '14px',
     fontWeight: '500',
+  },
+  attemptsLeft: {
+    fontWeight: '700',
   },
 }
