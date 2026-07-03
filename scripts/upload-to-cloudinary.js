@@ -70,6 +70,15 @@ async function uploadFile(fileConfig) {
 }
 
 async function main() {
+    // Validate environment variables
+    if (!process.env.CLOUDINARY_CLOUD_NAME || 
+        !process.env.CLOUDINARY_API_KEY || 
+        !process.env.CLOUDINARY_API_SECRET) {
+        console.error('❌ ERROR: Missing Cloudinary credentials in .env file');
+        console.error('Required: CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET');
+        process.exit(1);
+    }
+
     console.log('==========================================');
     console.log('  Cloudinary Upload Script');
     console.log('==========================================');

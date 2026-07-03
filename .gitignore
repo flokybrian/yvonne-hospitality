@@ -12,6 +12,15 @@ build/
 .env
 .env.local
 .env.*.local
+.env.production
+.env.staging
+backend/.env
+
+# Upload script output — may contain CDN URLs
+scripts/cloudinary-urls.json
+
+# TypeScript build cache
+*.tsbuildinfo
 
 # Logs
 *.log

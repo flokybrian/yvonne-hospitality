@@ -8,10 +8,15 @@ dist/
 dist-ssr/
 *.local
 
-# Environment
+# Environment — NEVER commit .env with real credentials
 .env
 .env.local
 .env.*.local
+.env.production
+.env.staging
+
+# Cloudinary upload output (contains URLs, not secrets, but keep out of repo)
+scripts/cloudinary-urls.json
 
 # Logs
 *.log
