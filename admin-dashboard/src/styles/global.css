@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #B68A52;
+  --primary-dark: #8A6234;
+  --secondary: #F7F2EC;
+  --white: #FFFFFF;
+  --black: #111111;
+  --text: #2D2D2D;
+  --text-light: #666666;
+  --border: #ECECEC;
+  --success: #16A34A;
+  --danger: #DC2626;
+  --warning: #F59E0B;
+  --sidebar-bg: #1F2937;
+  --sidebar-text: #D1D5DB;
+  --sidebar-hover: #374151;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+body {
+  background: #F9FAFB;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+input, textarea, select {
+  font-family: inherit;
+}
