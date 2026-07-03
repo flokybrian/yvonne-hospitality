@@ -1,79 +1,80 @@
-.button{
+/* ===========================
+   BUTTON – 3D EFFECT
+=========================== */
 
-display:inline-flex;
-
-align-items:center;
-
-justify-content:center;
-
-gap:.75rem;
-
-padding:15px 34px;
-
-font-size:1rem;
-
-font-weight:600;
-
-border-radius:999px;
-
-transition:var(--transition);
-
-cursor:pointer;
-
-border:2px solid transparent;
-
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 15px 34px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 999px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    font-family: var(--font-body);
+    transition: all 0.2s ease;
+    transform-style: preserve-3d;
 }
 
-.primary{
-
-background:var(--primary);
-
-color:var(--white);
-
+/* Primary */
+.primary {
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: 0 5px 0 var(--primary-dark);
 }
 
-.primary:hover{
-
-background:var(--primary-dark);
-
-transform:translateY(-3px);
-
+.primary:hover {
+    background: var(--primary-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 0 #6d4d25;
 }
 
-.secondary{
-
-background:var(--secondary);
-
-color:var(--text);
-
+.primary:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--primary-dark);
 }
 
-.secondary:hover{
-
-background:var(--accent);
-
+/* Secondary */
+.secondary {
+    background: var(--secondary);
+    color: var(--text);
+    box-shadow: 0 5px 0 #e0d5c9;
 }
 
-.outline{
-
-border:2px solid var(--primary);
-
-color:var(--primary);
-
-background:transparent;
-
+.secondary:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 0 #c5b584;
 }
 
-.outline:hover{
-
-background:var(--primary);
-
-color:white;
-
+.secondary:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #e0d5c9;
 }
 
-.fullWidth{
+/* Outline */
+.outline {
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    background: transparent;
+    box-shadow: 0 5px 0 var(--border);
+}
 
-width:100%;
+.outline:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 0 var(--primary-dark);
+}
 
+.outline:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--border);
+}
+
+/* Full width */
+.fullWidth {
+    width: 100%;
 }

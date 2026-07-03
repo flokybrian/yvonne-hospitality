@@ -10,7 +10,6 @@
     padding: 100px 0 60px;
 }
 
-/* Two-column layout */
 .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -28,7 +27,6 @@
     gap: 1.1rem;
 }
 
-/* Badge row */
 .badge {
     display: flex;
     align-items: center;
@@ -49,7 +47,6 @@
     flex-shrink: 0;
 }
 
-/* Main heading */
 .heading {
     font-family: var(--font-heading);
     font-size: clamp(2.4rem, 5vw, 4rem);
@@ -63,7 +60,6 @@
     color: var(--primary);
 }
 
-/* Intro */
 .intro {
     font-size: clamp(0.95rem, 2vw, 1.05rem);
     color: var(--text);
@@ -77,7 +73,6 @@
     font-weight: 700;
 }
 
-/* Description */
 .description {
     font-size: 0.9rem;
     color: var(--text-light);
@@ -85,7 +80,6 @@
     margin: 0;
 }
 
-/* Italic quote */
 .quote {
     font-family: var(--font-heading);
     font-style: italic;
@@ -98,7 +92,7 @@
 }
 
 /* ===========================
-   HERO BUTTONS
+   HERO BUTTONS – 3D EFFECT
 =========================== */
 
 .heroButtons {
@@ -122,19 +116,28 @@
     color: var(--text);
     background: transparent;
     cursor: pointer;
-    transition: var(--transition);
     font-family: var(--font-body);
     text-decoration: none;
     min-height: 44px;
+    transition: all 0.2s ease;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 0 var(--border);
 }
 
 .downloadBtn:hover {
     border-color: var(--primary);
     color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 0 #d4a97a;
+}
+
+.downloadBtn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 var(--border);
 }
 
 /* ===========================
-   SOCIAL LINKS ROW
+   SOCIAL ICONS ROW
 =========================== */
 
 .socials {
@@ -160,6 +163,7 @@
     flex-wrap: wrap;
 }
 
+/* Base social icon */
 .socialIcon {
     display: flex;
     align-items: center;
@@ -170,15 +174,68 @@
     border: 1.5px solid var(--border);
     color: var(--text);
     font-size: 0.88rem;
-    transition: var(--transition);
     text-decoration: none;
+    position: relative;
+    background: white;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
 }
 
+/* Branded hover — fill with --brand-color */
 .socialIcon:hover {
-    background: var(--primary);
-    border-color: var(--primary);
+    background: var(--brand-color);
+    border-color: var(--brand-color);
     color: white;
-    transform: translateY(-2px);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Tooltip label */
+.socialIcon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: var(--brand-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    z-index: 99;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
+}
+
+/* Tooltip arrow */
+.socialIcon::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--brand-color);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 99;
+}
+
+.socialIcon:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.socialIcon:hover::before {
+    opacity: 1;
 }
 
 /* ===========================
@@ -239,99 +296,32 @@
 }
 
 /* ===========================
-   TABLET  (≤ 1024px)
+   RESPONSIVE
 =========================== */
 
 @media (max-width: 1024px) {
-    .heroImg {
-        height: 480px;
-    }
-    .imageContainer {
-        max-width: 420px;
-    }
+    .heroImg { height: 480px; }
+    .imageContainer { max-width: 420px; }
 }
-
-/* ===========================
-   MOBILE  (≤ 900px)
-=========================== */
 
 @media (max-width: 900px) {
-    .hero {
-        padding: 110px 0 50px;
-        min-height: auto;
-    }
-
-    .grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    /* Photo goes on top */
-    .right {
-        order: -1;
-        justify-content: center;
-    }
-
-    .imageContainer {
-        max-width: 380px;
-        width: 100%;
-    }
-
-    .heroImg {
-        height: 380px;
-        border-radius: 20px;
-    }
-
-    .heroStats {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 26px 24px;
-        gap: 16px;
-    }
+    .hero { padding: 110px 0 50px; min-height: auto; }
+    .grid { grid-template-columns: 1fr; gap: 2rem; }
+    .right { order: -1; justify-content: center; }
+    .imageContainer { max-width: 380px; width: 100%; }
+    .heroImg { height: 380px; border-radius: 20px; }
+    .heroStats { grid-template-columns: repeat(2, 1fr); padding: 26px 24px; gap: 16px; }
 }
 
-/* ===========================
-   SMALL MOBILE  (≤ 480px)
-=========================== */
-
 @media (max-width: 480px) {
-    .hero {
-        padding: 96px 0 40px;
-    }
-
-    .imageContainer {
-        max-width: 100%;
-    }
-
-    .heroImg {
-        height: 300px;
-        border-radius: 16px;
-    }
-
-    .heroButtons {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    /* Make all buttons full-width on tiny screens */
+    .hero { padding: 96px 0 40px; }
+    .imageContainer { max-width: 100%; }
+    .heroImg { height: 300px; border-radius: 16px; }
+    .heroButtons { flex-direction: column; align-items: stretch; }
     .heroButtons a,
     .heroButtons button,
-    .downloadBtn {
-        width: 100%;
-        text-align: center;
-        justify-content: center;
-    }
-
-    .heroStats {
-        grid-template-columns: repeat(2, 1fr);
-        padding: 20px 16px;
-        border-radius: var(--radius-lg);
-    }
-
-    .statItem h3 {
-        font-size: 1.5rem;
-    }
-
-    .socials {
-        gap: 12px;
-    }
+    .downloadBtn { width: 100%; text-align: center; justify-content: center; }
+    .heroStats { grid-template-columns: repeat(2, 1fr); padding: 20px 16px; border-radius: var(--radius-lg); }
+    .statItem h3 { font-size: 1.5rem; }
+    .socials { gap: 12px; }
 }

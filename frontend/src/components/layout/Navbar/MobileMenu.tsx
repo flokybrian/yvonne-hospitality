@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { LuMenu, LuX, LuPhone, LuMail } from "react-icons/lu";
-import { FaInstagram, FaLinkedinIn, FaFacebookF, FaTiktok, FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaLinkedinIn, FaFacebookF, FaTiktok, FaWhatsapp, FaYoutube, FaDiscord } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { SiGmail } from "react-icons/si";
 
 import YvonneLogo from "@/components/common/Logo";
 import { navigation } from "@/config/navigation";
@@ -14,11 +16,15 @@ interface Props {
 }
 
 const socials = [
-    { icon: <FaInstagram />, href: siteContent.social.instagram, label: "Instagram" },
-    { icon: <FaLinkedinIn />, href: siteContent.social.linkedin, label: "LinkedIn" },
-    { icon: <FaFacebookF />, href: siteContent.social.facebook, label: "Facebook" },
-    { icon: <FaTiktok />, href: siteContent.social.tiktok, label: "TikTok" },
-    { icon: <FaWhatsapp />, href: siteContent.social.whatsapp, label: "WhatsApp" },
+    { icon: <FaInstagram />, href: siteContent.social.instagram, label: "Instagram", color: "#E4405F" },
+    { icon: <FaLinkedinIn />, href: siteContent.social.linkedin, label: "LinkedIn", color: "#0077B5" },
+    { icon: <FaFacebookF />, href: siteContent.social.facebook, label: "Facebook", color: "#1877F2" },
+    { icon: <FaTiktok />, href: siteContent.social.tiktok, label: "TikTok", color: "#000000" },
+    { icon: <FaWhatsapp />, href: siteContent.social.whatsapp, label: "WhatsApp", color: "#25D366" },
+    { icon: <FaYoutube />, href: siteContent.social.youtube, label: "YouTube", color: "#FF0000" },
+    { icon: <FaXTwitter />, href: siteContent.social.x, label: "X", color: "#000000" },
+    { icon: <FaDiscord />, href: siteContent.social.discord, label: "Discord", color: "#5865F2" },
+    { icon: <SiGmail />, href: siteContent.social.gmail, label: "Gmail", color: "#EA4335" },
 ];
 
 export default function MobileMenu({ open, setOpen }: Props) {
@@ -112,6 +118,7 @@ export default function MobileMenu({ open, setOpen }: Props) {
                             className={styles.drawerSocialIcon}
                             target="_blank"
                             rel="noopener noreferrer"
+                            style={{ "--brand-color": s.color } as React.CSSProperties}
                         >
                             {s.icon}
                         </a>

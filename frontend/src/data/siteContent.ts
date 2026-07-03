@@ -68,7 +68,15 @@ export const siteContent = {
 
         tiktok: "https://www.tiktok.com/@",
 
-        whatsapp: "https://wa.me/254717167152"
+        whatsapp: "https://wa.me/254717167152",
+
+        youtube: "https://www.youtube.com/@",
+
+        x: "https://x.com/",
+
+        discord: "https://discord.gg/",
+
+        gmail: "mailto:agani.mugasia24@s.karu.ac.ke"
 
     },
 

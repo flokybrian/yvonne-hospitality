@@ -201,15 +201,66 @@
     border: 1.5px solid rgba(255, 255, 255, 0.15);
     color: rgba(255, 255, 255, 0.65);
     font-size: 0.95rem;
-    transition: var(--transition);
     text-decoration: none;
+    position: relative;
+    background: rgba(255,255,255,0.05);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 .socialIcon:hover {
-    background: var(--primary);
-    border-color: var(--primary);
+    background: var(--brand-color);
+    border-color: var(--brand-color);
     color: white;
-    transform: translateY(-2px);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+/* Tooltip */
+.socialIcon::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 10px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background: var(--brand-color);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.2s ease;
+    z-index: 99;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+.socialIcon::before {
+    content: '';
+    position: absolute;
+    bottom: calc(100% + 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid var(--brand-color);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 99;
+}
+
+.socialIcon:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.socialIcon:hover::before {
+    opacity: 1;
 }
 
 /* ===========================
