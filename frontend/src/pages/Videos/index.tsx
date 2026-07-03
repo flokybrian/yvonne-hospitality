@@ -1,36 +1,107 @@
+import { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import Container from "@/components/common/Container";
+import { LuPlay, LuX } from "react-icons/lu";
+import styles from "./Videos.module.css";
+
+const videos = [
+    {
+        id: 1,
+        title: "Event Highlights 1",
+        description: "Professional event management and hospitality showcase",
+        thumbnail: "/videos/video1.mp4",
+        videoUrl: "/videos/video1.mp4"
+    },
+    {
+        id: 2,
+        title: "Event Highlights 2",
+        description: "Guest experience and service excellence in action",
+        thumbnail: "/videos/video2.mp4",
+        videoUrl: "/videos/video2.mp4"
+    },
+    {
+        id: 3,
+        title: "Event Highlights 3",
+        description: "Corporate hospitality and event coordination",
+        thumbnail: "/videos/video3.mp4",
+        videoUrl: "/videos/video3.mp4"
+    }
+];
 
 export default function Videos() {
+    const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
     return (
         <>
             <Helmet>
                 <title>Videos | Yvonne Hospitality & Management</title>
             </Helmet>
             
-            <div style={{ padding: "120px 0 80px", textAlign: "center" }}>
-                <div style={{ maxWidth: "800px", margin: "0 auto", padding: "0 24px" }}>
-                    <h1 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>Videos Page</h1>
-                    <p style={{ fontSize: "1.1rem", color: "#666", marginBottom: "40px" }}>
-                        This page is under construction. Check back soon!
-                    </p>
-                    <a 
-                        href="/" 
-                        style={{
-                            display: "inline-block",
-                            padding: "14px 32px",
-                            background: "#B68A52",
-                            color: "white",
-                            borderRadius: "999px",
-                            fontWeight: "700",
-                            textDecoration: "none",
-                            transition: "transform 0.2s"
-                        }}
-                        onMouseEnter={(e) => e.currentTarget.style.transform = "translateY(-2px)"}
-                        onMouseLeave={(e) => e.currentTarget.style.transform = "translateY(0)"}
-                    >
-                        ← Back to Home
-                    </a>
-                </div>
+            <div className={styles.videosPage}>
+                <Container>
+                    {/* Page Header */}
+                    <div className={styles.header}>
+                        <p className={styles.subtitle}>VIDEO GALLERY</p>
+                        <h1 className={styles.title}>Event Highlights</h1>
+                        <p className={styles.description}>
+                            Watch memorable moments from events, showcasing our dedication to creating exceptional hospitality experiences.
+                        </p>
+                    </div>
+
+                    {/* Video Grid */}
+                    <div className={styles.videoGrid}>
+                        {videos.map((video) => (
+                            <div 
+                                key={video.id} 
+                                className={styles.videoCard}
+                                onClick={() => setSelectedVideo(video.videoUrl)}
+                            >
+                                <div className={styles.videoThumbnail}>
+                                    <video 
+                                        src={video.thumbnail}
+                                        muted
+                                        playsInline
+                                        preload="metadata"
+                                        className={styles.thumbnailVideo}
+                                    />
+                                    <div className={styles.playOverlay}>
+                                        <button 
+                                            className={styles.playButton}
+                                            aria-label={`Play ${video.title}`}
+                                        >
+                                            <LuPlay size={32} />
+                                        </button>
+                                    </div>
+                                </div>
+                                <div className={styles.videoInfo}>
+                                    <h3>{video.title}</h3>
+                                    <p>{video.description}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </Container>
+
+                {/* Video Modal */}
+                {selectedVideo && (
+                    <div className={styles.modal} onClick={() => setSelectedVideo(null)}>
+                        <button 
+                            className={styles.closeBtn}
+                            onClick={() => setSelectedVideo(null)}
+                            aria-label="Close video"
+                        >
+                            <LuX size={24} />
+                        </button>
+                        <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
+                            <video 
+                                src={selectedVideo}
+                                controls
+                                autoPlay
+                                className={styles.modalVideo}
+                            />
+                        </div>
+                    </div>
+                )}
             </div>
         </>
     );
