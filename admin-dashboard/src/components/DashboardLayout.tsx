@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { LuHome, LuImage, LuVideo, LuBriefcase, LuStar, LuLogOut } from 'react-icons/lu'
+import { LuHouse, LuImage, LuVideo, LuBriefcase, LuStar, LuLogOut } from 'react-icons/lu'
 
 interface Props {
   children: ReactNode
@@ -18,7 +18,7 @@ export default function DashboardLayout({ children, title }: Props) {
   }
 
   const navItems = [
-    { path: '/', icon: <LuHome />, label: 'Dashboard' },
+    { path: '/', icon: <LuHouse />, label: 'Dashboard' },
     { path: '/gallery', icon: <LuImage />, label: 'Gallery' },
     { path: '/videos', icon: <LuVideo />, label: 'Videos' },
     { path: '/portfolio', icon: <LuBriefcase />, label: 'Portfolio' },

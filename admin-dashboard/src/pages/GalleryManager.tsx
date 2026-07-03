@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import DashboardLayout from '../components/DashboardLayout'
-import { LuPlus, LuTrash2, LuEdit } from 'react-icons/lu'
+import { LuPlus, LuTrash2, LuPencil } from 'react-icons/lu'
 
 interface GalleryItem {
   id: number
@@ -54,7 +54,7 @@ export default function GalleryManager() {
               <p style={styles.cardCategory}>{item.category}</p>
               <div style={styles.cardActions}>
                 <button onClick={() => handleEdit(item)} style={styles.editBtn}>
-                  <LuEdit /> Edit
+                  <LuPencil /> Edit
                 </button>
                 <button onClick={() => handleDelete(item.id)} style={styles.deleteBtn}>
                   <LuTrash2 /> Delete
@@ -119,7 +119,7 @@ const styles = {
   image: {
     width: '100%',
     height: '200px',
-    objectFit: 'cover',
+    objectFit: 'cover' as const,
   },
   cardBody: {
     padding: '20px',
