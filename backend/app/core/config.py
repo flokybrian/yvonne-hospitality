@@ -7,6 +7,9 @@ class Settings(BaseSettings):
     APP_VERSION: str = "1.0.0"
     DEBUG: bool = False
 
+    # ── Security ─────────────────────────────────────────
+    SECRET_KEY: str = "your-secret-key-change-in-production-min-32-chars"
+    
     # ── Database ─────────────────────────────────────────
     DATABASE_URL: str = "sqlite:///./yvonne.db"  # override in .env
 
@@ -19,7 +22,9 @@ class Settings(BaseSettings):
     # ── CORS ─────────────────────────────────────────────
     ALLOWED_ORIGINS: list[str] = [
         "http://localhost:5173",
+        "http://localhost:5174",
         "https://yvonne-hospitality.onrender.com",
+        "https://admin-yvonne.onrender.com",
     ]
 
     class Config:
