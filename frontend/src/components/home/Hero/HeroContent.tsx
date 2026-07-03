@@ -21,7 +21,7 @@ export default function HeroContent() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7 }}
             >
-                Hello, I'm{" "}
+                Bonjour, I'm{" "}
                 <span className={styles.highlight}>Yvonne.</span>
             </motion.h1>
 

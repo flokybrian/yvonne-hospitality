@@ -14,7 +14,7 @@ export const siteContent = {
 
         badge: "HOSPITALITY & MANAGEMENT PROFESSIONAL",
 
-        greeting: "Hello, I'm Yvonne.",
+        greeting: "Bonjour, I'm Yvonne.",
 
         age: "20 years old",
 
